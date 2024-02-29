@@ -27,6 +27,8 @@ const SearchedFlightsPage = ({}: SearchedFlightsPageProps) => {
     fetchFlightsData,
   } = SearchedFlightsPageViewModel();
 
+  console.log("hey rendered")
+
   return (
     <SafeAreaView edges={['top']} style={{flex: 1}}>
       <AppBar

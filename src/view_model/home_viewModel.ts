@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import Snackbar from 'react-native-snackbar';
 import { getFlights } from '../repository/network_data';
+import { FlightsInterface } from '../interface/flights_interface';
 
 export const HomePageViewModel = () => {
   const navigator = useNavigation();
@@ -48,18 +49,6 @@ export const HomePageViewModel = () => {
   const minutes = Math.floor((remainingTime % 3600) / 60);
   const seconds = remainingTime % 60;
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (remainingTime > 0) {
-        setRemainingTime(remainingTime - 1);
-      } else {
-        clearInterval(timer);
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [remainingTime]);
-
 
   const [flightData, setFlightData] = useState<FlightsInterface>();
 
@@ -86,10 +75,6 @@ export const HomePageViewModel = () => {
       });
     }
   };
-
-  useEffect(() => {
-    fetchFlightsData();
-  }, []);
 
 
   return {
