@@ -9,6 +9,7 @@ import FlightDetailCard from '../../components/flight_detail_card';
 import DatePicker from 'react-native-date-picker';
 import {dateFormatter} from '../../utils/formatter';
 import {HomePageViewModel} from '../../view_model/home_viewModel';
+import { useEffect } from 'react';
 
 type Props = {};
 
@@ -149,6 +150,11 @@ const FlightDetailsList = (props: FlightDetailsListProps) => {
     fetchFlightsData,
   } = HomePageViewModel();
 
+  useEffect(() => {
+    fetchFlightsData();
+  }, []);
+
+
   const LoadingView = () => (
     <View style={{justifyContent: 'center'}}>
       <ActivityIndicator size={'large'} />
@@ -193,6 +199,18 @@ type FlashSaleTitleProps = {};
 const FlashSaleTitle = (props: FlashSaleTitleProps) => {
   const {remainingTime, setRemainingTime, hours, minutes, seconds} =
     HomePageViewModel();
+
+    useEffect(() => {
+      const timer = setInterval(() => {
+        if (remainingTime > 0) {
+          setRemainingTime(remainingTime - 1);
+        } else {
+          clearInterval(timer);
+        }
+      }, 1000);
+  
+      return () => clearInterval(timer);
+    }, [remainingTime]);
 
   return (
     <View

@@ -6,6 +6,7 @@ import HomePage from './home_page/home_page';
 import ExplorePage from './explore_page/explore_page';
 import HomeSvg from '../../assets/home.svg';
 import ExploreSvg from '../../assets/explore.svg';
+import TryPage from './try_page';
 
 type LandingPageProps = {};
 
